@@ -4,12 +4,11 @@ using API.Data;
 using API.Entities;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class UsersController : ControllerBase
+       public class UsersController : BaseApiController
     {
         private readonly DataContext _context;
 
@@ -25,6 +24,7 @@ namespace API.Controllers
         }   
 
         // api/users/3
+        [Authorize]
         [HttpGet("{id}")]
         public ActionResult<AppUser> GetUser(int id)
         {
